@@ -1,0 +1,79 @@
+//=====================================
+//
+//ゲームシーン処理[GameScene.cpp]
+//Author:GP12A332 21 立花雄太
+//
+//=====================================
+#include "GameScene.h"
+#include "debugWindow.h"
+#include "HexaTransition.h"
+
+#include "Framework\ResourceManager.h"
+#include "Player.h"
+
+/**************************************
+マクロ定義
+***************************************/
+
+/**************************************
+グローバル変数
+***************************************/
+
+/**************************************
+初期化処理
+***************************************/
+void GameScene::Init()
+{
+	//リソース作成
+	//第一引数でリソースを識別するタグ名、第二引数でテクスチャへのパス、第三引数でポリゴンサイズを指定
+	ResourceManager::Instance()->MakePolygon("Sample", "data/TEXTURE/sample.png", D3DXVECTOR2(20.0f, 20.0f));
+
+	//インスタンス作成
+	player = new Player();
+
+	//初期化処理
+	player->Init();
+
+	//トランジションアウト
+	HexaTransition::Instance()->SetTransition(false);
+
+}
+
+/**************************************
+終了処理
+***************************************/
+void GameScene::Uninit()
+{
+	//終了処理
+	player->Uninit();
+
+	//インスタンス削除
+	SAFE_DELETE(player);
+}
+
+/**************************************
+更新処理
+***************************************/
+void GameScene::Update(HWND hWnd)
+{
+	player->Update();
+}
+
+/**************************************
+描画処理
+***************************************/
+void GameScene::Draw()
+{
+	LPDIRECT3DDEVICE9 pDevice = GetDevice();
+
+	//今回は2Dゲームなのでライティングをオフ、ポリゴンを裏面まで描画する
+	pDevice->SetRenderState(D3DRS_LIGHTING, false);
+	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
+	//描画処理
+	player->Draw();
+
+	//レンダーステート復元
+	pDevice->SetRenderState(D3DRS_LIGHTING, true);
+	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+}
