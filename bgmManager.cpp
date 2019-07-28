@@ -22,10 +22,12 @@
 /**************************************
 グローバル変数
 ***************************************/
+//BGMのファイルへのパス
 static const TCHAR* BgmFileName[BGM_MAX] = {
 	_T("data/SOUND/LAST_GUARDIAN.wav"),
 };
 
+//BGMの音量
 static const float bgmVolume[BGM_MAX] = {
 	20.0f,
 };
