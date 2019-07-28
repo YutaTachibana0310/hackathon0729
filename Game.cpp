@@ -18,6 +18,10 @@
 #include "GameScene.h"
 #include "ResultScene.h"
 
+#include "sound.h"
+#include "soundEffectManager.h"
+#include "bgmManager.h"
+
 #include "HexaTransition.h"
 
 /**************************************
@@ -79,6 +83,10 @@ void InitGame(HINSTANCE hInstance, HWND hWnd)
 
 	RegisterDebugTimer("Main");
 
+	InitSound(hWnd);
+	InitBgmManager(0);
+	InitSoundEffectManager(0);
+
 	fsm[currentScene]->Init();
 }
 
@@ -93,6 +101,10 @@ void UninitGame()
 	UninitDebugTimer();
 
 	fsm[currentScene]->Uninit();
+
+	UninitSoundEffectManager(0);
+	UninitBgmManager(0);
+	UninitSound();
 }
 
 /**************************************

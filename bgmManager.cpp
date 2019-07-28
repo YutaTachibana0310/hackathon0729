@@ -24,12 +24,10 @@
 ***************************************/
 static const TCHAR* BgmFileName[BGM_MAX] = {
 	_T("data/SOUND/LAST_GUARDIAN.wav"),
-	_T("data/SOUND/Sword_dance.wav"),
-	_T("data/SOUND/P.L.A.Y..wav"),
-	_T("data/SOUND/Landing+On+The+Moon_jingle.wav"),
-	_T("data/SOUND/gameover2.wav"),
-	_T("data/SOUND/To_the_Next_Generation.wav"),
-	_T("data/SOUND/Traffic_Jam.wav"),
+};
+
+static const float bgmVolume[BGM_MAX] = {
+	20.0f,
 };
 
 static BGM bgmData[BGM_MAX];
@@ -37,9 +35,6 @@ static BGM bgmData[BGM_MAX];
 /**************************************
 プロトタイプ宣言
 ***************************************/
-bool SaveSettingsBGM(void);
-bool LoadSettingsBGM(void);
-void DrawDebugWindowBGM(void);
 
 /**************************************
 初期化処理
@@ -50,12 +45,11 @@ void InitBgmManager(int num)
 
 	if (!initialized)
 	{
-		bool res = LoadSettingsBGM();
-
 		BGM *ptr = &bgmData[0];
 		for (int i = 0; i < BGM_MAX; i++, ptr++)
 		{
 			ptr->clip = LoadSound(&BgmFileName[i][0]);
+			ptr->volume = bgmVolume[i];
 			SetSoundVolume(ptr->clip, ptr->volume);
 		}
 		initialized = true;
@@ -109,8 +103,6 @@ void UpdateBgmManager(void)
 			ptr->state = BGM_NORMAL;
 		}
 	}
-
-	DrawDebugWindowBGM();
 }
 
 /**************************************
@@ -172,64 +164,4 @@ void FadeOutBGM(DEFINE_BGM bgm, int duration)
 	ptr->cntFrame = 0;
 	ptr->fadeDuration = duration;
 	ptr->state = BGM_FADEOUT;
-}
-
-/**************************************
-デバッグウィンドウ
-***************************************/
-void DrawDebugWindowBGM(void)
-{
-}
-
-/**************************************
-設定保存処理
-***************************************/
-bool SaveSettingsBGM(void)
-{
-	FILE *fp = NULL;
-
-	fp = fopen("data/SETTINGS/bgm.ini", "wb");
-
-	if (fp == NULL)
-	{
-		return false;
-	}
-
-	BGM *ptr = &bgmData[0];
-	for (int i = 0; i < BGM_MAX;i++, ptr++)
-	{
-		fwrite(&ptr->volume, sizeof(float), 1, fp);
-	}
-
-	fclose(fp);
-	return true;
-}
-
-/**************************************
-設定読み込み処理
-***************************************/
-bool LoadSettingsBGM(void)
-{
-	FILE *fp = NULL;
-
-	//fp = fopen("data/SETTINGS/bgm.ini", "rb");
-	if (fp == NULL)
-	{
-		BGM *ptr = &bgmData[0];
-		for (int i = 0; i < BGM_MAX; i++, ptr++)
-		{
-			ptr->volume = SOUND_VOLUME_INIT;
-		}
-		return false;
-	}
-
-	BGM *ptr = &bgmData[0];
-	for (int i = 0; i < BGM_MAX; i++, ptr++)
-	{
-		int res = fread(&ptr->volume, sizeof(float), 1, fp);
-		if (res == EOF)
-			ptr->volume = SOUND_VOLUME_INIT;
-	}
-
-	return true;
 }

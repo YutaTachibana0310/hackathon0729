@@ -7,6 +7,7 @@
 #include "GameScene.h"
 #include "debugWindow.h"
 #include "HexaTransition.h"
+#include "bgmManager.h"
 
 #include "Framework\ResourceManager.h"
 #include "Player.h"
@@ -37,6 +38,8 @@ void GameScene::Init()
 	//トランジションアウト
 	HexaTransition::Instance()->SetTransition(false);
 
+	//BGMフェードイン
+	FadeInBGM(BGM_BATTLESCENE, 60);
 }
 
 /**************************************
