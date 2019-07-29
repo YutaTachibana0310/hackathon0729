@@ -8,8 +8,14 @@
 Enemy::Enemy(int num)
 {
 	//ポリゴンをリソースマネージャから取得
-	ResourceManager::Instance()->GetPolygon("Sample", &polygon);
+	ResourceManager::Instance()->GetPolygon("Enemy", &polygon);
 
+	// 当たり判定生成
+	bodyCollider = new BoxCollider3D(BoxCollider3DTag::Enemy, &transform.pos);
+	bodyCollider->SetSize(ENEMY_COLLIDER_SIZE);
+	bodyCollider->active = true;
+
+	// 座標セット
 	switch (num)
 	{
 	case 0:
@@ -22,7 +28,6 @@ Enemy::Enemy(int num)
 		this->transform.pos = START_LOW;
 		break;
 	}
-	//this->transform.pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 
 	use = true;
 }
@@ -39,6 +44,12 @@ void Enemy::Update()
 
 	// 画面外判定
 	Check();
+
+	// 当たり判定
+	if (bodyCollider->isHit)
+	{
+		use = false;
+	}
 }
 
 void Enemy::Draw()
@@ -53,6 +64,8 @@ void Enemy::Draw()
 
 	//描画
 	polygon->Draw();
+
+	BoxCollider3D::DrawCollider(bodyCollider);
 }
 
 // 画面外判定
