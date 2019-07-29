@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClCompile Include="BG.cpp" />
     <ClCompile Include="bgmManager.cpp" />
+    <ClCompile Include="BloodScreen.cpp" />
     <ClCompile Include="BombParticle.cpp" />
     <ClCompile Include="BombParticleController.cpp" />
     <ClCompile Include="camera.cpp" />
@@ -197,10 +198,12 @@
     <ClCompile Include="soundEffectManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="TutorialScene.cpp" />
+    <ClCompile Include="UIObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BG.h" />
     <ClInclude Include="bgmManager.h" />
+    <ClInclude Include="BloodScreen.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="BombParticle.h" />
     <ClInclude Include="BombParticleController.h" />
@@ -274,6 +277,7 @@
     <ClInclude Include="soundEffectManager.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="TutorialScene.h" />
+    <ClInclude Include="UIObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

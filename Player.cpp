@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Framework\ResourceManager.h"
 #include "input.h"
+#include "BloodScreen.h"
 
 /**************************************
 マクロ定義
@@ -148,6 +149,12 @@ void Player::Update()
 			textureID = PlayerStand;
 		}
 	}
+
+	// エネミーに接触したときの処理
+	if (bodyCollider->isHit)
+	{
+		OnHitEnemy();
+	}
 }
 
 /**************************************
@@ -183,4 +190,11 @@ void Player::OnHitEnemy()
 	invincibleFrame = 0;
 
 	textureID = PlayerDown;
+
+	// 画面を徐々に赤く
+	BloodScreen::SetAlpha();
+
+	// 接触を終了
+	bodyCollider->isHit = false;
+	bodyCollider->active = false;
 }
