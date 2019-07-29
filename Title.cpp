@@ -171,7 +171,7 @@ void UpdateTitle(void)
 		SetColorTitleLogoStart();
 	}
 
-#if 1
+#if 0
 
 	if (GetKeyboardTrigger(DIK_SPACE))
 	{

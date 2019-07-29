@@ -18,7 +18,7 @@
 ***************************************/
 #define PLAYER_INIT_POS				(D3DXVECTOR3(-100.0f, 0.0f, 0.0f))
 #define PLAYER_POLYGON_SIZE			(D3DXVECTOR2(40.0f, 60.0f))
-#define PLAYER_ATTACK_FRAME			(30)
+#define PLAYER_ATTACK_FRAME			(20)
 #define PLAYTER_COLLIDER_SIZE		(D3DXVECTOR3(20.0f, 40.0f, 0.0f))
 #define PLAYER_ATTACKCOLLIDER_SIZE	(D3DXVECTOR3(30.0f, 10.0f, 5.0f))
 
