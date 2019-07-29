@@ -176,8 +176,12 @@ void BoxCollider3D::UpdateCollision()
 			if (!attack->active)
 				continue;
 
-			//衝突フラグを立てる
-			enemy->isHit = true;
+			if (attack->CheckCollision(enemy))
+			{
+				//衝突フラグを立てる
+				enemy->isHit = true;
+
+			}
 		}
 	}
 
@@ -192,8 +196,11 @@ void BoxCollider3D::UpdateCollision()
 			if (!player->active)
 				continue;
 
-			//衝突フラグを立てる
-			player->isHit = true;
+			if (enemy->CheckCollision(player))
+			{
+				//衝突フラグを立てる
+				player->isHit = true;
+			}
 		}
 	}
 }

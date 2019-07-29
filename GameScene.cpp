@@ -8,7 +8,7 @@
 #include "debugWindow.h"
 #include "HexaTransition.h"
 #include "bgmManager.h"
-
+#include "Framework\BoxCollider3D.h"
 #include "Framework\ResourceManager.h"
 #include "Player.h"
 #include "BG.h"
@@ -31,6 +31,7 @@ void GameScene::Init()
 	//リソース作成
 	//第一引数でリソースを識別するタグ名、第二引数でテクスチャへのパス、第三引数でポリゴンサイズを指定
 	ResourceManager::Instance()->MakePolygon("Sample", "data/TEXTURE/sample.png", PLAYER_POLYGON_SIZE);
+	ResourceManager::Instance()->MakePolygon("Enemy", "data/TEXTURE/bug.png", ENEMY_POLYGON_SIZE);
 	ResourceManager::Instance()->MakePolygon("GameBG", "data/TEXTURE/room.jpg", D3DXVECTOR2(200.0f, 100.0f));
 
 	//インスタンス作成
@@ -76,6 +77,8 @@ void GameScene::Update(HWND hWnd)
 	enemy->Update();
 
 	GameSceneParticleManager::Instance()->Update();
+
+	BoxCollider3D::UpdateCollision();
 }
 
 /**************************************
