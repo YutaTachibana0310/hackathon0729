@@ -15,6 +15,7 @@
 #include "EnemyManager.h"
 #include "BloodScreen.h"
 #include "GameSceneParticleManager.h"
+#include "Timer.h"
 
 /**************************************
 マクロ定義
@@ -54,6 +55,10 @@ void GameScene::Init()
 	//UI
 	ui.push_back(new BloodScreen());
 
+	//タイマー
+	timer = new Timer();
+	timer->Start();
+
 	//トランジションアウト
 	HexaTransition::Instance()->SetTransition(false);
 
@@ -82,6 +87,8 @@ void GameScene::Uninit()
 	}
 	ui.clear();
 	ReleaseVector(ui);
+
+	delete timer;
 }
 
 /**************************************
@@ -99,6 +106,14 @@ void GameScene::Update(HWND hWnd)
 	for (auto & Object : ui)
 	{
 		Object->Update();
+	}
+
+	timer->Update();
+
+	// タイマーチェック
+	if (timer->Check() == 0)
+	{
+		timer->Stop();
 	}
 }
 
@@ -122,6 +137,8 @@ void GameScene::Draw()
 	{
 		Object->Draw();
 	}
+
+	timer->Draw();
 
 	//レンダーステート復元
 	pDevice->SetRenderState(D3DRS_LIGHTING, true);
