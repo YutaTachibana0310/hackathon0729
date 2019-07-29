@@ -24,7 +24,7 @@
 ***************************************/
 //BGMのファイルへのパス
 static const TCHAR* BgmFileName[BGM_MAX] = {
-	_T("data/SOUND/LAST_GUARDIAN.wav"),
+	_T("data/SOUND/game.wav"),
 };
 
 //BGMの音量

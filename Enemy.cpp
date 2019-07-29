@@ -4,6 +4,7 @@
 #include "GameScene.h"
 #include "GameSceneParticleManager.h"
 #include "GameParameter.h"
+#include "soundEffectManager.h"
 
 #define ENEMY_SPEED	D3DXVECTOR3(-1.0f, 0.0f, 0.0f)
 #define ENEMY_POINT			(10)
@@ -56,6 +57,8 @@ void Enemy::Update()
 
 		GameParameter::Instance()->AddCombo(1);
 		GameParameter::Instance()->AddScore(ENEMY_POINT);
+
+		PlaySE(SE_KICK);
 	}
 }
 
