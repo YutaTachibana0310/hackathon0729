@@ -118,6 +118,8 @@ void GameScene::Draw()
 	player->Draw();
 	enemy->Draw();
 
+	GameSceneParticleManager::Instance()->Draw();
+
 	for (auto & Object : ui)
 	{
 		Object->Draw();
@@ -127,5 +129,4 @@ void GameScene::Draw()
 	pDevice->SetRenderState(D3DRS_LIGHTING, true);
 	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 
-	GameSceneParticleManager::Instance()->Draw();
 }
