@@ -5,6 +5,10 @@
 //
 //=====================================
 #include "TitleScene.h"
+#include "Title.h"
+#include "input.h"
+#include "HexaTransition.h"
+#include "Game.h"
 
 /**************************************
 ƒ}ƒNƒ’è‹`
@@ -19,7 +23,8 @@
 ***************************************/
 void TitleScene::Init()
 {
-
+	HexaTransition::Instance()->SetTransition(false);
+	InitTitle();
 }
 
 /**************************************
@@ -27,7 +32,7 @@ void TitleScene::Init()
 ***************************************/
 void TitleScene::Uninit()
 {
-
+	UninitTitle();
 }
 
 /**************************************
@@ -35,7 +40,15 @@ void TitleScene::Uninit()
 ***************************************/
 void TitleScene::Update(HWND hWnd)
 {
+	UpdateTitle();
 
+	if (GetKeyboardTrigger(DIK_Z) || GetKeyboardTrigger(DIK_X) || GetKeyboardTrigger(DIK_C))
+	{
+		HexaTransition::Instance()->SetTransition(true, []() 
+		{
+			ChangeScene(SceneGame); 
+		});
+	}
 }
 
 /**************************************
@@ -43,5 +56,5 @@ void TitleScene::Update(HWND hWnd)
 ***************************************/
 void TitleScene::Draw()
 {
-
+	DrawTitle();
 }

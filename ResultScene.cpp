@@ -5,6 +5,10 @@
 //
 //=====================================
 #include "ResultScene.h"
+#include "Result.h"
+#include "Game.h"
+#include "input.h"
+#include "HexaTransition.h"
 
 /**************************************
 ƒ}ƒNƒ’è‹`
@@ -19,7 +23,8 @@
 ***************************************/
 void ResultScene::Init()
 {
-
+	HexaTransition::Instance()->SetTransition(false);
+	InitResult();
 }
 
 /**************************************
@@ -27,7 +32,7 @@ void ResultScene::Init()
 ***************************************/
 void ResultScene::Uninit()
 {
-
+	UninitResult();
 }
 
 /**************************************
@@ -35,7 +40,15 @@ void ResultScene::Uninit()
 ***************************************/
 void ResultScene::Update(HWND hWnd)
 {
+	UpdateResult();
 
+	if (GetKeyboardTrigger(DIK_Z) || GetKeyboardTrigger(DIK_X) || GetKeyboardTrigger(DIK_C))
+	{
+		HexaTransition::Instance()->SetTransition(true, []()
+		{
+			ChangeScene(SceneTitle);
+		});
+	}
 }
 
 /**************************************
@@ -43,5 +56,5 @@ void ResultScene::Update(HWND hWnd)
 ***************************************/
 void ResultScene::Draw()
 {
-
+	DrawResult();
 }
