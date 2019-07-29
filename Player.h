@@ -26,7 +26,7 @@
 
 #define PLAYER_INVINCBILE_FRAME		(180)
 
-#define PLAYER_DONW_FRAME			(180)
+#define PLAYER_DONW_FRAME			(60)
 
 /**************************************
 ƒNƒ‰ƒX’è‹`

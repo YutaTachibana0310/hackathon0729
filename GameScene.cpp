@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "BG.h"
 #include "EnemyManager.h"
+#include "BloodScreen.h"
 
 /**************************************
 マクロ定義
@@ -44,6 +45,9 @@ void GameScene::Init()
 	//インスタンス作成
 	enemy = new EnemyManager();
 
+	//UI
+	ui.push_back(new BloodScreen());
+
 	//トランジションアウト
 	HexaTransition::Instance()->SetTransition(false);
 
@@ -64,6 +68,14 @@ void GameScene::Uninit()
 	SAFE_DELETE(bg);
 
 	delete enemy;
+
+	// UI削除
+	for (auto &Object : ui)
+	{
+		SAFE_DELETE(Object);
+	}
+	ui.clear();
+	ReleaseVector(ui);
 }
 
 /**************************************
@@ -75,6 +87,11 @@ void GameScene::Update(HWND hWnd)
 	enemy->Update();
 
 	BoxCollider3D::UpdateCollision();
+
+	for (auto & Object : ui)
+	{
+		Object->Update();
+	}
 }
 
 /**************************************
@@ -92,6 +109,11 @@ void GameScene::Draw()
 	bg->Draw();
 	player->Draw();
 	enemy->Draw();
+
+	for (auto & Object : ui)
+	{
+		Object->Draw();
+	}
 
 	//レンダーステート復元
 	pDevice->SetRenderState(D3DRS_LIGHTING, true);

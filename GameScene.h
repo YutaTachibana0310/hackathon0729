@@ -26,6 +26,7 @@
 class Player;
 class BG;
 class EnemyManager;
+class UIObject;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -42,6 +43,8 @@ private:
 	Player *player;
 	BG *bg;
 	EnemyManager *enemy;
+	std::vector<UIObject*> ui;
+
 };
 
 #endif
