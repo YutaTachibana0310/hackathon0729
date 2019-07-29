@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "Framework\ResourceManager.h"
 #include "GameScene.h"
+#include "GameSceneParticleManager.h"
 
 #define ENEMY_SPEED	D3DXVECTOR3(-1.0f, 0.0f, 0.0f)
 
@@ -49,6 +50,7 @@ void Enemy::Update()
 	if (bodyCollider->isHit)
 	{
 		use = false;
+		GameSceneParticleManager::Instance()->SetEnemyExplosion(transform.pos);
 	}
 }
 

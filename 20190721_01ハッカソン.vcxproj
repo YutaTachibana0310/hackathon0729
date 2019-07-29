@@ -163,6 +163,7 @@
     <ClCompile Include="Framework\SkyBox.cpp" />
     <ClCompile Include="Framework\Transform.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameParameter.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GameSceneParticleManager.cpp" />
     <ClCompile Include="HexaTransition.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="Framework\SkyBox.h" />
     <ClInclude Include="Framework\Transform.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameParameter.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GameSceneParticleManager.h" />
     <ClInclude Include="HexaTransition.h" />
