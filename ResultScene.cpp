@@ -9,6 +9,7 @@
 #include "Game.h"
 #include "input.h"
 #include "HexaTransition.h"
+#include "bgmManager.h"
 
 /**************************************
 ƒ}ƒNƒ’è‹`
@@ -25,6 +26,8 @@ void ResultScene::Init()
 {
 	HexaTransition::Instance()->SetTransition(false);
 	InitResult();
+
+	PlayBGM(BGM_RESULT);
 }
 
 /**************************************
@@ -44,6 +47,7 @@ void ResultScene::Update(HWND hWnd)
 
 	if (GetKeyboardTrigger(DIK_Z) || GetKeyboardTrigger(DIK_X) || GetKeyboardTrigger(DIK_C))
 	{
+		FadeOutBGM(BGM_RESULT, 30);
 		HexaTransition::Instance()->SetTransition(true, []()
 		{
 			ChangeScene(SceneTitle);

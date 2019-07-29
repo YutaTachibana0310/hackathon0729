@@ -30,11 +30,13 @@
 ***************************************/
 static const TCHAR* soundFileName[SE_MAX] =
 {
-	_T("data/SOUND/lockon.wav"),
+	_T("data/SOUND/kick01.wav"),
+	_T("data/SOUND/select02.wav"),
 };
 
 static const float soundVolume[SE_MAX] = {
-	1.0f,
+	50.0f,
+	50.0f,
 };
 
 static vector<SOUNDEFFECT> container;

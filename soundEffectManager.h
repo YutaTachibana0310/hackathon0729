@@ -26,7 +26,8 @@ using namespace std;
 enum DefineSE
 {
 	//サウンド通しナンバー
-	SE_LOCKON,
+	SE_KICK,
+	SE_BUTTON,
 	SE_MAX
 };
 
