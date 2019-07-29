@@ -1,14 +1,14 @@
 //=====================================
 //
-//ゲームパラメータヘッダ[GameParameter.h]
+//ボムパーティクルコントローラヘッダ[ExplosionFlareController.h]
 //Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _GAMEPARAMETER_H_
-#define _GAMEPARAMETER_H_
+#ifndef _EXPLOSIONFLARECONTROLLER_H_
+#define _EXPLOSIONFLARECONTROLLER_H_
 
 #include "main.h"
-#include "Framework\BaseSingleton.h"
+#include "Framework\BaseParticleController.h"
 
 /**************************************
 マクロ定義
@@ -17,19 +17,10 @@
 /**************************************
 クラス定義
 ***************************************/
-class GameParameter : public BaseSingleton<GameParameter>
+class ExplosionFlareController : public BaseParticleController
 {
-	friend class BaseSingleton<GameParameter>;
-
-public:
 	void Init();
-
-	void AddCombo(int num);
-	void ResetCombo();
-	void AddScore(int point);
-
-	int score;
-	int combo;
+	void Emit();
 };
 
 #endif

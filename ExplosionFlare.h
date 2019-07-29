@@ -1,14 +1,15 @@
 //=====================================
 //
-//ゲームパラメータヘッダ[GameParameter.h]
+//テンプレートヘッダ[Template.h]
 //Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _GAMEPARAMETER_H_
-#define _GAMEPARAMETER_H_
+#ifndef _EXPLOSIONFLARE_H_
+#define _EXPLOSIONFLARE_H_
 
 #include "main.h"
-#include "Framework\BaseSingleton.h"
+#include "Framework\AnimationParticle.h"
+#include "Framework\BaseEmitter.h"
 
 /**************************************
 マクロ定義
@@ -17,19 +18,20 @@
 /**************************************
 クラス定義
 ***************************************/
-class GameParameter : public BaseSingleton<GameParameter>
+class ExplosionFlare : public AnimationParticle
 {
-	friend class BaseSingleton<GameParameter>;
-
 public:
 	void Init();
+	void Update();
 
-	void AddCombo(int num);
-	void ResetCombo();
-	void AddScore(int point);
+	D3DXVECTOR3 moveDir;
+};
 
-	int score;
-	int combo;
+class ExplosionFlareEmitter : public BaseEmitter
+{
+public:
+	void Init();
+	void Update();
 };
 
 #endif

@@ -6,6 +6,7 @@
 //=====================================
 #include "GameSceneParticleManager.h"
 #include "BombParticleController.h"
+#include "ExplosionFlareController.h"
 
 using namespace std;
 
@@ -26,6 +27,7 @@ typedef SceneParticleManager Base;
 enum ParticleController
 {
 	EnemyExplosion,
+	EnemyFlare,
 	ControllerMax
 };
 
@@ -41,6 +43,7 @@ void GameSceneParticleManager::Init()
 	//各コントローラを生成
 	controllers.resize(ControllerMax);
 	controllers[EnemyExplosion] = new BombParticleController();
+	controllers[EnemyFlare] = new ExplosionFlareController();
 
 	//各パーティクル初期化
 	for (auto& controller : controllers)
@@ -67,6 +70,7 @@ void GameSceneParticleManager::Update(void)
 void GameSceneParticleManager::SetEnemyExplosion(D3DXVECTOR3 pos)
 {
 	controllers[EnemyExplosion]->SetEmitter(&pos);
+	controllers[EnemyFlare]->SetEmitter(&pos);
 }
 
 #ifdef GAMEPARTICLE_USE_DEBUG

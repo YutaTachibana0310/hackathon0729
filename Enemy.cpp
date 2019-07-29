@@ -3,8 +3,10 @@
 #include "Framework\ResourceManager.h"
 #include "GameScene.h"
 #include "GameSceneParticleManager.h"
+#include "GameParameter.h"
 
 #define ENEMY_SPEED	D3DXVECTOR3(-1.0f, 0.0f, 0.0f)
+#define ENEMY_POINT			(10)
 
 Enemy::Enemy(int num)
 {
@@ -51,6 +53,9 @@ void Enemy::Update()
 	{
 		use = false;
 		GameSceneParticleManager::Instance()->SetEnemyExplosion(transform.pos);
+
+		GameParameter::Instance()->AddCombo(1);
+		GameParameter::Instance()->AddScore(ENEMY_POINT);
 	}
 }
 
