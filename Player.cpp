@@ -8,6 +8,7 @@
 #include "Framework\ResourceManager.h"
 #include "input.h"
 #include "BloodScreen.h"
+#include "GameParameter.h"
 
 /**************************************
 マクロ定義
@@ -197,4 +198,7 @@ void Player::OnHitEnemy()
 	// 接触を終了
 	bodyCollider->isHit = false;
 	bodyCollider->active = false;
+
+	//コンボをリセット
+	GameParameter::Instance()->ResetCombo();
 }
