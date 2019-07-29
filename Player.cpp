@@ -31,6 +31,15 @@ Player::Player()
 	attackCollider->SetSize(PLAYER_ATTACKCOLLIDER_SIZE);
 	attackCollider->active = false;
 	
+
+	isAttackNow = false;
+	attackFrame = 0;
+
+	isInvincible = false;
+	invincibleFrame = 0;
+
+	isDownNow = false;
+	downFrame = 0;
 }
 
 /**************************************
@@ -47,7 +56,7 @@ Player::~Player()
 ***************************************/
 void Player::Init()
 {
-	transform.pos = D3DXVECTOR3(-100.0f, 0.0f, 0.0f);
+	transform.pos = PLAYER_INIT_POS;
 	
 	isAttackNow = false;
 	attackFrame = 0;
@@ -68,7 +77,7 @@ void Player::Update()
 {
 
 	//攻撃入力
-	if (!isAttackNow)
+	if (!isAttackNow && !isDownNow)
 	{
 		//上段攻撃
 		if (GetKeyboardTrigger(DIK_Z))
@@ -106,6 +115,27 @@ void Player::Update()
 			attackCollider->active = false;
 		}
 	}
+
+	//無敵時間の更新
+	if (isInvincible && !isDownNow)
+	{
+		invincibleFrame++;
+		if (invincibleFrame == PLAYER_INVINCBILE_FRAME)
+		{
+			isInvincible = false;
+			bodyCollider->active = true;
+		}
+	}
+	
+	//行動不能時間の更新
+	if (isDownNow)
+	{
+		downFrame++;
+		if (downFrame == PLAYER_DONW_FRAME)
+		{
+			isDownNow = false;
+		}
+	}
 }
 
 /**************************************
@@ -127,4 +157,17 @@ void Player::Draw()
 	//当たり判定描画
 	BoxCollider3D::DrawCollider(bodyCollider);
 	BoxCollider3D::DrawCollider(attackCollider);
+}
+
+
+/**************************************
+エネミーとの衝突処理
+***************************************/
+void Player::OnHitEnemy()
+{
+	downFrame = 0;
+	isDownNow = true;
+
+	isInvincible = true;
+	invincibleFrame = 0;
 }

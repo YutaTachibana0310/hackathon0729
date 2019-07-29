@@ -24,6 +24,10 @@
 #define ATTACK_MIDDLE_POS			(D3DXVECTOR3(-80.0f, 0.0f, 0.0f))
 #define ATTACK_LOWER_POS			(D3DXVECTOR3(-80.0f, -30.0f, 0.0f))
 
+#define PLAYER_INVINCBILE_FRAME		(180)
+
+#define PLAYER_DONW_FRAME			(180)
+
 /**************************************
 クラス定義
 ***************************************/
@@ -38,8 +42,16 @@ public:
 	void Update();
 	void Draw();
 
+	void OnHitEnemy();
+
 	bool isAttackNow;
 	int attackFrame;		//攻撃の効果時間
+
+	bool isInvincible;		//無敵判定
+	int invincibleFrame;	//無敵時間
+
+	bool isDownNow;		
+	int downFrame;			//攻撃後の行動不能時間
 
 	BoxCollider3D *bodyCollider;
 	BoxCollider3D *attackCollider;
