@@ -2,11 +2,13 @@
 #include "EnemyManager.h"
 #include "debugWindow.h"
 
-#define START_TIMING	(20)	// 何フレームごとに発生するか
+#define START_TIMING	(90)	// 何フレームごとに発生するか(初期)
+#define MAX_TIMING		(30)	// 発生のスピードの最高
 
 EnemyManager::EnemyManager()
 {
 	startcnt = 0;
+	firetime = START_TIMING;
 }
 
 
@@ -69,13 +71,16 @@ void EnemyManager::Set()
 {
 
 	startcnt++;
-	if (startcnt == START_TIMING)
+	if (startcnt == firetime)
 	{
 		int random = rand() % 3;
 
 		enemy.push_back(new Enemy(random));
 
 		startcnt = 0;
+
+		firetime--;
+		firetime = max(firetime, MAX_TIMING);
 	}
 }
 

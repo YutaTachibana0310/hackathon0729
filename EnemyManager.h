@@ -8,6 +8,7 @@ class EnemyManager
 private:
 	std::vector<Enemy*> enemy;
 	int startcnt;				// 発生までのカウントアップ
+	int firetime;				// 発射するタイミング
 
 	void Set();
 	void Check();
