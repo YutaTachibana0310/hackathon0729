@@ -20,6 +20,26 @@ Player::Player()
 {
 	//ポリゴンをリソースマネージャから取得
 	ResourceManager::Instance()->GetPolygon("Sample", &polygon);
+
+
+	//当たり判定生成
+	bodyCollider = new BoxCollider3D(BoxCollider3DTag::Player, &transform.pos);
+	bodyCollider->SetSize(PLAYTER_COLLIDER_SIZE);
+	bodyCollider->active = true;
+
+	attackCollider = new BoxCollider3D(BoxCollider3DTag::PlayerAttack, &attackPos);
+	attackCollider->SetSize(PLAYER_ATTACKCOLLIDER_SIZE);
+	attackCollider->active = false;
+	
+
+	isAttackNow = false;
+	attackFrame = 0;
+
+	isInvincible = false;
+	invincibleFrame = 0;
+
+	isDownNow = false;
+	downFrame = 0;
 }
 
 /**************************************
@@ -36,7 +56,10 @@ Player::~Player()
 ***************************************/
 void Player::Init()
 {
-
+	transform.pos = PLAYER_INIT_POS;
+	
+	isAttackNow = false;
+	attackFrame = 0;
 }
 
 /**************************************
@@ -52,17 +75,67 @@ void Player::Uninit()
 ***************************************/
 void Player::Update()
 {
-	//移動方向
-	D3DXVECTOR3 direction;
-	ZeroMemory(&direction, sizeof(direction));
 
-	//入力で移動方向を決定
-	direction.x = GetHorizontalInputPress();
-	direction.y = GetVerticalInputPress();
+	//攻撃入力
+	if (!isAttackNow && !isDownNow)
+	{
+		//上段攻撃
+		if (GetKeyboardTrigger(DIK_Z))
+		{
+			attackPos = ATTACK_UPPER_POS;
+			isAttackNow = true;
+			attackFrame = 0;
+			attackCollider->active = true;
+		}
+		//中段攻撃
+		else if (GetKeyboardTrigger(DIK_X))
+		{
+			attackPos = ATTACK_MIDDLE_POS;
+			isAttackNow = true;
+			attackFrame = 0;
+			attackCollider->active = true;
+		}
+		//下段攻撃
+		else if (GetKeyboardTrigger(DIK_C))
+		{
+			attackPos = ATTACK_LOWER_POS;
+			isAttackNow = true;
+			attackFrame = 0;
+			attackCollider->active = true;
+		}
+	}
 
-	//正規化して移動
-	D3DXVec3Normalize(&direction, &direction);
-	transform.pos += direction * PLAYER_MOVE_SPEED;
+	//攻撃判定の更新
+	if (isAttackNow)
+	{
+		attackFrame++;
+		if (attackFrame == PLAYER_ATTACK_FRAME)
+		{
+			isAttackNow = false;
+			attackCollider->active = false;
+		}
+	}
+
+	//無敵時間の更新
+	if (isInvincible && !isDownNow)
+	{
+		invincibleFrame++;
+		if (invincibleFrame == PLAYER_INVINCBILE_FRAME)
+		{
+			isInvincible = false;
+			bodyCollider->active = true;
+		}
+	}
+	
+	//行動不能時間の更新
+	if (isDownNow)
+	{
+		downFrame++;
+		if (downFrame == PLAYER_DONW_FRAME)
+		{
+			isDownNow = false;
+		}
+	}
 }
 
 /**************************************
@@ -80,4 +153,21 @@ void Player::Draw()
 
 	//描画
 	polygon->Draw();
+
+	//当たり判定描画
+	BoxCollider3D::DrawCollider(bodyCollider);
+	BoxCollider3D::DrawCollider(attackCollider);
+}
+
+
+/**************************************
+エネミーとの衝突処理
+***************************************/
+void Player::OnHitEnemy()
+{
+	downFrame = 0;
+	isDownNow = true;
+
+	isInvincible = true;
+	invincibleFrame = 0;
 }
