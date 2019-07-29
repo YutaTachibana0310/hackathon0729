@@ -15,11 +15,16 @@
 /**************************************
 マクロ定義
 ***************************************/
+// 出現場所
+#define START_HIGH		D3DXVECTOR3(200.0f, 40.0f, 0.0f)
+#define START_MIDDLE	D3DXVECTOR3(200.0f, 0.0f, 0.0f)
+#define START_LOW		D3DXVECTOR3(200.0f, -40.0f, 0.0f)
 
 /**************************************
 前方宣言
 ***************************************/
 class Player;
+class EnemyManager;
 
 /**************************************
 クラス定義
@@ -34,6 +39,7 @@ public:
 
 private:
 	Player *player;
+	EnemyManager *enemy;
 };
 
 #endif

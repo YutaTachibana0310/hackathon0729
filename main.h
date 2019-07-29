@@ -22,6 +22,7 @@
 #include <tchar.h>
 #include <stdio.h>
 #include <assert.h>
+#include <vector>
 
 //*****************************************************************************
 // ライブラリのリンク
@@ -110,6 +111,15 @@ typedef struct
 	D3DXVECTOR3 nor;
 }PLANE;
 
+// ベクターメモリ解放
+using namespace std;
+
+template <class T>
+void ReleaseVector(vector<T>& vt)
+{
+	vector<T> vtTemp;
+	vtTemp.swap(vt);
+}
 
 //*****************************************************************************
 // プロトタイプ宣言

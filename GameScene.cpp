@@ -11,6 +11,7 @@
 
 #include "Framework\ResourceManager.h"
 #include "Player.h"
+#include "EnemyManager.h"
 
 /**************************************
 マクロ定義
@@ -35,6 +36,9 @@ void GameScene::Init()
 	//初期化処理
 	player->Init();
 
+	//インスタンス作成
+	enemy = new EnemyManager();
+
 	//トランジションアウト
 	HexaTransition::Instance()->SetTransition(false);
 
@@ -52,6 +56,8 @@ void GameScene::Uninit()
 
 	//インスタンス削除
 	SAFE_DELETE(player);
+
+	delete enemy;
 }
 
 /**************************************
@@ -60,6 +66,7 @@ void GameScene::Uninit()
 void GameScene::Update(HWND hWnd)
 {
 	player->Update();
+	enemy->Update();
 }
 
 /**************************************
@@ -75,6 +82,7 @@ void GameScene::Draw()
 
 	//描画処理
 	player->Draw();
+	enemy->Draw();
 
 	//レンダーステート復元
 	pDevice->SetRenderState(D3DRS_LIGHTING, true);
