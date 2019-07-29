@@ -55,7 +55,7 @@ static LPDIRECT3DVERTEXBUFFER9 screenVtx;
 static IStateScene* fsm[SceneMax];
 
 //Œ»Ý‚ÌƒV[ƒ“
-static Scene currentScene = SceneGame;
+static Scene currentScene = SceneResult;
 
 /**************************************
 ‰Šú‰»ˆ—
@@ -120,6 +120,9 @@ void UpdateGame(HWND hWnd)
 	fsm[currentScene]->Update(hWnd);
 
 	HexaTransition::Instance()->Update();
+
+	UpdateBgmManager();
+	UpdateSoundEffectManager();
 }
 
 /**************************************
