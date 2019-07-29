@@ -18,9 +18,13 @@
 ***************************************/
 Player::Player()
 {
+	polygonContainer.resize(PlayerTextureMax);
 	//ポリゴンをリソースマネージャから取得
-	ResourceManager::Instance()->GetPolygon("Sample", &polygon);
-
+	ResourceManager::Instance()->GetPolygon("Player", &polygonContainer[PlayerStand]);
+	ResourceManager::Instance()->GetPolygon("PlayerUpper", &polygonContainer[PlayerUpper]);
+	ResourceManager::Instance()->GetPolygon("PlayerMiddle", &polygonContainer[PlayerMiddle]);
+	ResourceManager::Instance()->GetPolygon("PlayerLower", &polygonContainer[PlayerLower]);
+	ResourceManager::Instance()->GetPolygon("PlayerDown", &polygonContainer[PlayerDown]);
 
 	//当たり判定生成
 	bodyCollider = new BoxCollider3D(BoxCollider3DTag::Player, &transform.pos);
@@ -30,7 +34,7 @@ Player::Player()
 	attackCollider = new BoxCollider3D(BoxCollider3DTag::PlayerAttack, &attackPos);
 	attackCollider->SetSize(PLAYER_ATTACKCOLLIDER_SIZE);
 	attackCollider->active = false;
-	
+
 
 	isAttackNow = false;
 	attackFrame = 0;
@@ -48,7 +52,10 @@ Player::Player()
 Player::~Player()
 {
 	//メモリの解放はリソースマネージャに任せるので参照をやめるだけ
-	polygon = NULL;
+	for (auto& polygon : polygonContainer)
+	{
+		polygon = NULL;
+	}
 }
 
 /**************************************
@@ -57,7 +64,7 @@ Player::~Player()
 void Player::Init()
 {
 	transform.pos = PLAYER_INIT_POS;
-	
+
 	isAttackNow = false;
 	attackFrame = 0;
 }
@@ -86,6 +93,7 @@ void Player::Update()
 			isAttackNow = true;
 			attackFrame = 0;
 			attackCollider->active = true;
+			textureID = PlayerUpper;
 		}
 		//中段攻撃
 		else if (GetKeyboardTrigger(DIK_X))
@@ -94,6 +102,7 @@ void Player::Update()
 			isAttackNow = true;
 			attackFrame = 0;
 			attackCollider->active = true;
+			textureID = PlayerMiddle;
 		}
 		//下段攻撃
 		else if (GetKeyboardTrigger(DIK_C))
@@ -102,6 +111,7 @@ void Player::Update()
 			isAttackNow = true;
 			attackFrame = 0;
 			attackCollider->active = true;
+			textureID = PlayerLower;
 		}
 	}
 
@@ -113,6 +123,7 @@ void Player::Update()
 		{
 			isAttackNow = false;
 			attackCollider->active = false;
+			textureID = PlayerStand;
 		}
 	}
 
@@ -126,7 +137,7 @@ void Player::Update()
 			bodyCollider->active = true;
 		}
 	}
-	
+
 	//行動不能時間の更新
 	if (isDownNow)
 	{
@@ -134,6 +145,7 @@ void Player::Update()
 		if (downFrame == PLAYER_DONW_FRAME)
 		{
 			isDownNow = false;
+			textureID = PlayerStand;
 		}
 	}
 }
@@ -152,13 +164,12 @@ void Player::Draw()
 	pDevice->SetTransform(D3DTS_WORLD, &mtxWorld);
 
 	//描画
-	polygon->Draw();
+	polygonContainer[textureID]->Draw();
 
 	//当たり判定描画
 	BoxCollider3D::DrawCollider(bodyCollider);
 	BoxCollider3D::DrawCollider(attackCollider);
 }
-
 
 /**************************************
 エネミーとの衝突処理
@@ -170,4 +181,6 @@ void Player::OnHitEnemy()
 
 	isInvincible = true;
 	invincibleFrame = 0;
+
+	textureID = PlayerDown;
 }

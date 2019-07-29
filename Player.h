@@ -11,6 +11,8 @@
 #include "Framework\BoardPolygon.h"
 #include "Framework\BoxCollider3D.h"
 
+#include <vector>
+
 /**************************************
 マクロ定義
 ***************************************/
@@ -27,6 +29,16 @@
 #define PLAYER_INVINCBILE_FRAME		(180)
 
 #define PLAYER_DONW_FRAME			(180)
+
+enum PlayerTextureID
+{
+	PlayerStand,
+	PlayerUpper,
+	PlayerMiddle,
+	PlayerLower,
+	PlayerDown,
+	PlayerTextureMax
+};
 
 /**************************************
 クラス定義
@@ -57,10 +69,13 @@ public:
 	BoxCollider3D *attackCollider;
 
 private:
-	BoardPolygon* polygon;
+	std::vector<BoardPolygon*> polygonContainer;
+
 	Transform transform;
 
 	D3DXVECTOR3 attackPos;
+
+	int textureID;
 };
 
 #endif
