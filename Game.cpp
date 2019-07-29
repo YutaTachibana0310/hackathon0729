@@ -55,7 +55,7 @@ static LPDIRECT3DVERTEXBUFFER9 screenVtx;
 static IStateScene* fsm[SceneMax];
 
 //Œ»İ‚ÌƒV[ƒ“
-static Scene currentScene = SceneGame;
+static Scene currentScene = SceneTitle;
 
 /**************************************
 ‰Šú‰»ˆ—
