@@ -34,7 +34,7 @@ void GameScene::Init()
 	ResourceManager::Instance()->MakePolygon("Player", "data/TEXTURE/charStand.png", PLAYER_POLYGON_SIZE);
 	ResourceManager::Instance()->MakePolygon("Enemy", "data/TEXTURE/bug.png", ENEMY_POLYGON_SIZE);
 	ResourceManager::Instance()->MakePolygon("GameBG", "data/TEXTURE/room.jpg", D3DXVECTOR2(200.0f, 100.0f));
-	ResourceManager::Instance()->MakePolygon("PlayerUpper", "data/TEXTURE/charHighKick.png", PLAYER_POLYGON_SIZE);
+	ResourceManager::Instance()->MakePolygon("PlayerUpper", "data/TEXTURE/charSomersault.png", PLAYER_POLYGON_SIZE);
 	ResourceManager::Instance()->MakePolygon("PlayerMiddle", "data/TEXTURE/charMiddleKick.png", PLAYER_POLYGON_SIZE);
 	ResourceManager::Instance()->MakePolygon("PlayerLower", "data/TEXTURE/charLowKick.png", PLAYER_POLYGON_SIZE);
 	ResourceManager::Instance()->MakePolygon("PlayerDown", "data/TEXTURE/charDamage.png", PLAYER_POLYGON_SIZE);
