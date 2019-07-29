@@ -21,6 +21,8 @@ public:
 
 	void Update();
 	void Draw();
+
+	static int s_fireTiming;
 };
 
 #endif

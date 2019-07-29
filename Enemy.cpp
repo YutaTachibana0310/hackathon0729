@@ -6,7 +6,7 @@
 #include "GameParameter.h"
 #include "soundEffectManager.h"
 
-#define ENEMY_SPEED	D3DXVECTOR3(-1.0f, 0.0f, 0.0f)
+#define ENEMY_SPEED	D3DXVECTOR3(-3.0f, 0.0f, 0.0f)
 #define ENEMY_POINT			(10)
 
 Enemy::Enemy(int num)

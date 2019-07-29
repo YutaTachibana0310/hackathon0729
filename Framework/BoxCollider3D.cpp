@@ -243,6 +243,8 @@ void BoxCollider3D::RemoveFromCheckList()
 #ifdef BOXCOLLIDER3D_USE_DEBUG
 void BoxCollider3D::DrawCollider(BoxCollider3D *collider)
 {
+	return;
+
 	if (!collider->active)
 		return;
 

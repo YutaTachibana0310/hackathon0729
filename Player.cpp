@@ -9,6 +9,7 @@
 #include "input.h"
 #include "BloodScreen.h"
 #include "GameParameter.h"
+#include "EnemyManager.h"
 
 /**************************************
 マクロ定義
@@ -202,4 +203,6 @@ void Player::OnHitEnemy()
 
 	//コンボをリセット
 	GameParameter::Instance()->ResetCombo();
+
+	EnemyManager::s_fireTiming = 90;
 }

@@ -5,10 +5,13 @@
 #define START_TIMING	(90)	// 何フレームごとに発生するか(初期)
 #define MAX_TIMING		(30)	// 発生のスピードの最高
 
+int EnemyManager::s_fireTiming = START_TIMING;
+
 EnemyManager::EnemyManager()
 {
 	startcnt = 0;
 	firetime = START_TIMING;
+	s_fireTiming = START_TIMING;
 }
 
 
@@ -71,7 +74,7 @@ void EnemyManager::Set()
 {
 
 	startcnt++;
-	if (startcnt == firetime)
+	if (startcnt == s_fireTiming)
 	{
 		int random = rand() % 3;
 
@@ -79,8 +82,8 @@ void EnemyManager::Set()
 
 		startcnt = 0;
 
-		firetime--;
-		firetime = max(firetime, MAX_TIMING);
+		s_fireTiming -= 3;
+		s_fireTiming = max(s_fireTiming, MAX_TIMING);
 	}
 }
 
