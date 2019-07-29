@@ -10,10 +10,12 @@ Timer::Timer()
 	{
 		digit[i];
 	}
+	digit[0] = (currentTime / 60) % 10;
+	digit[1] = (currentTime / 600) % 10;
 
 	for (int i = 0; i < DIGIT_MAX; i++)
 	{
-		time[i] = new Digit(i);
+		time[i] = new Digit(i, digit[i]);
 	}
 }
 

@@ -20,6 +20,8 @@
 #define START_MIDDLE	D3DXVECTOR3(200.0f, 0.0f, 0.0f)
 #define START_LOW		D3DXVECTOR3(200.0f, -40.0f, 0.0f)
 
+#define START_TIME		(120)	// ゲーム開始までの猶予時間
+
 /**************************************
 前方宣言
 ***************************************/
@@ -28,6 +30,7 @@ class BG;
 class EnemyManager;
 class UIObject;
 class Timer;
+class Start;
 
 /**************************************
 クラス定義
@@ -46,6 +49,7 @@ private:
 	EnemyManager *enemy;
 	std::vector<UIObject*> ui;
 	Timer *timer;
+	Start *start;
 
 };
 

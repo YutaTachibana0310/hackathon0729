@@ -141,6 +141,7 @@
     <ClCompile Include="Digit.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="Finish.cpp" />
     <ClCompile Include="Framework\AnimationParticle.cpp" />
     <ClCompile Include="Framework\AnimContainer.cpp" />
     <ClCompile Include="Framework\BaseCameraPlugin.cpp" />
@@ -198,6 +199,7 @@
     <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="sound.cpp" />
     <ClCompile Include="soundEffectManager.cpp" />
+    <ClCompile Include="Start.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TitleScene.cpp" />
@@ -217,6 +219,7 @@
     <ClInclude Include="Digit.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="Finish.h" />
     <ClInclude Include="Framework\AnimationParticle.h" />
     <ClInclude Include="Framework\AnimContainer.h" />
     <ClInclude Include="Framework\BaseCameraPlugin.h" />
@@ -281,6 +284,7 @@
     <ClInclude Include="ResultScene.h" />
     <ClInclude Include="sound.h" />
     <ClInclude Include="soundEffectManager.h" />
+    <ClInclude Include="Start.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TitleScene.h" />

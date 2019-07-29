@@ -16,6 +16,8 @@
 #include "BloodScreen.h"
 #include "GameSceneParticleManager.h"
 #include "Timer.h"
+#include "Start.h"
+#include "Finish.h"
 
 /**************************************
 マクロ定義
@@ -54,6 +56,8 @@ void GameScene::Init()
 
 	//UI
 	ui.push_back(new BloodScreen());
+	start = new Start();
+
 
 	//タイマー
 	timer = new Timer();
@@ -89,6 +93,7 @@ void GameScene::Uninit()
 	ReleaseVector(ui);
 
 	delete timer;
+	delete start;
 }
 
 /**************************************
@@ -96,24 +101,39 @@ void GameScene::Uninit()
 ***************************************/
 void GameScene::Update(HWND hWnd)
 {
-	player->Update();
-	enemy->Update();
-
-	GameSceneParticleManager::Instance()->Update();
-
-	BoxCollider3D::UpdateCollision();
-
-	for (auto & Object : ui)
+	if (start->Check() < START_TIME)
 	{
-		Object->Update();
+		start->Update();
 	}
-
-	timer->Update();
-
-	// タイマーチェック
-	if (timer->Check() == 0)
+	else
 	{
-		timer->Stop();
+		if (timer->Check() > 0)
+		{
+			player->Update();
+			enemy->Update();
+
+			GameSceneParticleManager::Instance()->Update();
+
+			BoxCollider3D::UpdateCollision();
+		}
+
+		// タイマーチェック
+		if (timer->Check() == 0)
+		{
+			if (timer->GetUse())
+			{
+				ui.push_back(new Finish());
+				timer->Stop();
+			}
+		}
+
+		for (auto & Object : ui)
+		{
+			Object->Update();
+		}
+
+		timer->Update();
+
 	}
 }
 
@@ -135,12 +155,14 @@ void GameScene::Draw()
 
 	GameSceneParticleManager::Instance()->Draw();
 
+	timer->Draw();
+
 	for (auto & Object : ui)
 	{
 		Object->Draw();
 	}
 
-	timer->Draw();
+	start->Draw();
 
 	//レンダーステート復元
 	pDevice->SetRenderState(D3DRS_LIGHTING, true);

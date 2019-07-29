@@ -4,7 +4,7 @@
 #include "UIObject.h"
 #include "Digit.h"
 
-#define TIME_MAX	(3600)			// 制限時間(フレーム数)
+#define TIME_MAX	(600)			// 制限時間(フレーム数)
 #define DIGIT_MAX	(2)
 
 class Timer :
@@ -26,6 +26,8 @@ public:
 	void Stop();
 
 	DWORD Check();	// 現在時間の確認
+
+	bool GetUse() { return use; };
 };
 
 #endif

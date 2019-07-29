@@ -14,7 +14,7 @@ protected:
 
 
 public:
-	Digit(int digit);
+	Digit(int digit, DWORD time);
 	~Digit();
 
 	void Update()override;

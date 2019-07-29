@@ -10,12 +10,12 @@
 
 LPDIRECT3DTEXTURE9	Digit::D3DTexture = NULL; // テクスチャのポインタ
 
-Digit::Digit(int digit)
+Digit::Digit(int digit, DWORD time)
 {
 	LPDIRECT3DDEVICE9 Device = GetDevice();
 
 	use = true;
-	time = 0;
+	this->time = time;
 	pos = DIGIT_POS;
 	pos.x -= digit * DIGIT_SPACE;
 	size = DIGIT_SIZE;
@@ -102,9 +102,5 @@ void Digit::MakeVertex()
 	vertexWk[3].diffuse = D3DCOLOR_RGBA(255, 255, 255, 255);
 
 	// テクスチャ座標の設定
-	vertexWk[0].tex = D3DXVECTOR2(0.0f, 0.0f);
-	vertexWk[1].tex = D3DXVECTOR2(0.5f, 0.0f);
-	vertexWk[2].tex = D3DXVECTOR2(0.0f, 1.0f);
-	vertexWk[3].tex = D3DXVECTOR2(0.5f, 1.0f);
-
+	SetTexture();
 }
