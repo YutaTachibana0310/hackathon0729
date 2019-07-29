@@ -27,7 +27,7 @@ void GameScene::Init()
 {
 	//リソース作成
 	//第一引数でリソースを識別するタグ名、第二引数でテクスチャへのパス、第三引数でポリゴンサイズを指定
-	ResourceManager::Instance()->MakePolygon("Sample", "data/TEXTURE/sample.png", D3DXVECTOR2(20.0f, 20.0f));
+	ResourceManager::Instance()->MakePolygon("Sample", "data/TEXTURE/sample.png", PLAYER_POLYGON_SIZE);
 
 	//インスタンス作成
 	player = new Player();

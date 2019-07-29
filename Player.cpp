@@ -20,6 +20,17 @@ Player::Player()
 {
 	//ƒ|ƒŠƒSƒ“‚ðƒŠƒ\[ƒXƒ}ƒl[ƒWƒƒ‚©‚çŽæ“¾
 	ResourceManager::Instance()->GetPolygon("Sample", &polygon);
+
+
+	//“–‚½‚è”»’è¶¬
+	bodyCollider = new BoxCollider3D(BoxCollider3DTag::Player, &transform.pos);
+	bodyCollider->SetSize(PLAYTER_COLLIDER_SIZE);
+	bodyCollider->active = true;
+
+	attackCollider = new BoxCollider3D(BoxCollider3DTag::PlayerAttack, &attackPos);
+	attackCollider->SetSize(PLAYER_ATTACKCOLLIDER_SIZE);
+	attackCollider->active = false;
+	
 }
 
 /**************************************
@@ -36,7 +47,10 @@ Player::~Player()
 ***************************************/
 void Player::Init()
 {
-
+	transform.pos = D3DXVECTOR3(-100.0f, 0.0f, 0.0f);
+	
+	isAttackNow = false;
+	attackFrame = 0;
 }
 
 /**************************************
@@ -52,17 +66,46 @@ void Player::Uninit()
 ***************************************/
 void Player::Update()
 {
-	//ˆÚ“®•ûŒü
-	D3DXVECTOR3 direction;
-	ZeroMemory(&direction, sizeof(direction));
 
-	//“ü—Í‚ÅˆÚ“®•ûŒü‚ðŒˆ’è
-	direction.x = GetHorizontalInputPress();
-	direction.y = GetVerticalInputPress();
+	//UŒ‚“ü—Í
+	if (!isAttackNow)
+	{
+		//ã’iUŒ‚
+		if (GetKeyboardTrigger(DIK_Z))
+		{
+			attackPos = ATTACK_UPPER_POS;
+			isAttackNow = true;
+			attackFrame = 0;
+			attackCollider->active = true;
+		}
+		//’†’iUŒ‚
+		else if (GetKeyboardTrigger(DIK_X))
+		{
+			attackPos = ATTACK_MIDDLE_POS;
+			isAttackNow = true;
+			attackFrame = 0;
+			attackCollider->active = true;
+		}
+		//‰º’iUŒ‚
+		else if (GetKeyboardTrigger(DIK_C))
+		{
+			attackPos = ATTACK_LOWER_POS;
+			isAttackNow = true;
+			attackFrame = 0;
+			attackCollider->active = true;
+		}
+	}
 
-	//³‹K‰»‚µ‚ÄˆÚ“®
-	D3DXVec3Normalize(&direction, &direction);
-	transform.pos += direction * PLAYER_MOVE_SPEED;
+	//UŒ‚”»’è‚ÌXV
+	if (isAttackNow)
+	{
+		attackFrame++;
+		if (attackFrame == PLAYER_ATTACK_FRAME)
+		{
+			isAttackNow = false;
+			attackCollider->active = false;
+		}
+	}
 }
 
 /**************************************
@@ -80,4 +123,8 @@ void Player::Draw()
 
 	//•`‰æ
 	polygon->Draw();
+
+	//“–‚½‚è”»’è•`‰æ
+	BoxCollider3D::DrawCollider(bodyCollider);
+	BoxCollider3D::DrawCollider(attackCollider);
 }
