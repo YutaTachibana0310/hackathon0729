@@ -11,6 +11,7 @@
 
 #include "Framework\ResourceManager.h"
 #include "Player.h"
+#include "BG.h"
 
 /**************************************
 マクロ定義
@@ -28,12 +29,15 @@ void GameScene::Init()
 	//リソース作成
 	//第一引数でリソースを識別するタグ名、第二引数でテクスチャへのパス、第三引数でポリゴンサイズを指定
 	ResourceManager::Instance()->MakePolygon("Sample", "data/TEXTURE/sample.png", PLAYER_POLYGON_SIZE);
+	ResourceManager::Instance()->MakePolygon("GameBG", "data/TEXTURE/room.jpg", D3DXVECTOR2(200.0f, 100.0f));
 
 	//インスタンス作成
 	player = new Player();
+	bg = new BG();
 
 	//初期化処理
 	player->Init();
+	bg->Init();
 
 	//トランジションアウト
 	HexaTransition::Instance()->SetTransition(false);
@@ -52,6 +56,7 @@ void GameScene::Uninit()
 
 	//インスタンス削除
 	SAFE_DELETE(player);
+	SAFE_DELETE(bg);
 }
 
 /**************************************
@@ -74,6 +79,7 @@ void GameScene::Draw()
 	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
 	//描画処理
+	bg->Draw();
 	player->Draw();
 
 	//レンダーステート復元
