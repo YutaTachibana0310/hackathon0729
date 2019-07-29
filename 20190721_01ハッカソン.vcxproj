@@ -138,6 +138,7 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="debugTimer.cpp" />
     <ClCompile Include="debugWindow.cpp" />
+    <ClCompile Include="Digit.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Framework\AnimationParticle.cpp" />
@@ -195,6 +196,7 @@
     <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="sound.cpp" />
     <ClCompile Include="soundEffectManager.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="TutorialScene.cpp" />
     <ClCompile Include="UIObject.cpp" />
@@ -209,6 +211,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="debugTimer.h" />
     <ClInclude Include="debugWindow.h" />
+    <ClInclude Include="Digit.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="Framework\AnimationParticle.h" />
@@ -273,6 +276,7 @@
     <ClInclude Include="ResultScene.h" />
     <ClInclude Include="sound.h" />
     <ClInclude Include="soundEffectManager.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="TutorialScene.h" />
     <ClInclude Include="UIObject.h" />

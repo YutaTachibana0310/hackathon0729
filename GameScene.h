@@ -27,6 +27,7 @@ class Player;
 class BG;
 class EnemyManager;
 class UIObject;
+class Timer;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -44,6 +45,7 @@ private:
 	BG *bg;
 	EnemyManager *enemy;
 	std::vector<UIObject*> ui;
+	Timer *timer;
 
 };
 
