@@ -165,7 +165,37 @@ void BoxCollider3D::SetPosAddress(D3DXVECTOR3 *pPos)
 ***************************************/
 void BoxCollider3D::UpdateCollision()
 {
+	//プレイヤーの攻撃とエネミーの衝突判定
+	for (BoxCollider3D* enemy : checkDictionary[BoxCollider3DTag::Enemy])
+	{
+		if (!enemy->active)
+			continue;
 
+		for (BoxCollider3D* attack : checkDictionary[BoxCollider3DTag::PlayerAttack])
+		{
+			if (!attack->active)
+				continue;
+
+			//衝突フラグを立てる
+			enemy->isHit = true;
+		}
+	}
+
+	//プレイヤーの攻撃とエネミーの衝突判定
+	for (BoxCollider3D* enemy : checkDictionary[BoxCollider3DTag::Enemy])
+	{
+		if (!enemy->active)
+			continue;
+
+		for (BoxCollider3D* player : checkDictionary[BoxCollider3DTag::Player])
+		{
+			if (!player->active)
+				continue;
+
+			//衝突フラグを立てる
+			player->isHit = true;
+		}
+	}
 }
 
 /**************************************
@@ -218,6 +248,7 @@ void BoxCollider3D::DrawCollider(BoxCollider3D *collider)
 
 	//レンダーステートとマテリアルを設定
 	pDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	pDevice->SetRenderState(D3DRS_LIGHTING, true);
 	pDevice->SetMaterial(&material);
 	pDevice->SetTexture(0, NULL);
 
@@ -237,6 +268,7 @@ void BoxCollider3D::DrawCollider(BoxCollider3D *collider)
 
 	//レンダーステートとマテリアル復元
 	pDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	pDevice->SetRenderState(D3DRS_LIGHTING, false);
 	pDevice->SetMaterial(&matDef);
 
 }
