@@ -58,6 +58,7 @@ Player::~Player()
 	{
 		polygon = NULL;
 	}
+	polygonContainer.clear();
 }
 
 /**************************************
