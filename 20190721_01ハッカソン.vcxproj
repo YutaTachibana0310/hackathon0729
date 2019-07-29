@@ -142,6 +142,8 @@
     <ClCompile Include="Digit.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="ExplosionFlare.cpp" />
+    <ClCompile Include="ExplosionFlareController.cpp" />
     <ClCompile Include="Framework\AnimationParticle.cpp" />
     <ClCompile Include="Framework\AnimContainer.cpp" />
     <ClCompile Include="Framework\BaseCameraPlugin.cpp" />
@@ -220,6 +222,8 @@
     <ClInclude Include="Digit.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="ExplosionFlare.h" />
+    <ClInclude Include="ExplosionFlareController.h" />
     <ClInclude Include="Framework\AnimationParticle.h" />
     <ClInclude Include="Framework\AnimContainer.h" />
     <ClInclude Include="Framework\BaseCameraPlugin.h" />
