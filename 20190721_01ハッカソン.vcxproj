@@ -200,6 +200,7 @@
     <ClCompile Include="PostEffect\StrongBlurFilter.cpp" />
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="ResultScene.cpp" />
+    <ClCompile Include="resultscore.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="sound.cpp" />
     <ClCompile Include="soundEffectManager.cpp" />
@@ -289,6 +290,7 @@
     <ClInclude Include="PostEffect\StrongBlurFilter.h" />
     <ClInclude Include="Result.h" />
     <ClInclude Include="ResultScene.h" />
+    <ClInclude Include="resultscore.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="sound.h" />
     <ClInclude Include="soundEffectManager.h" />
