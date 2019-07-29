@@ -1,5 +1,9 @@
 #include "main.h"
 #include "Finish.h"
+#include "input.h"
+#include "HexaTransition.h"
+#include "Game.h"
+#include "bgmManager.h"
 
 #define FINISH_TEXTURE	("data/TEXTURE/finish.png")
 #define FINISH_SIZE	D3DXVECTOR3(400.0f, 400.0f, 0.0f)
@@ -32,6 +36,15 @@ Finish::~Finish()
 
 void Finish::Update()
 {
+	if (GetKeyboardTrigger(DIK_Z) || GetKeyboardTrigger(DIK_X) || GetKeyboardTrigger(DIK_C))
+	{
+		FadeOutBGM(BGM_BATTLESCENE, 30);
+		HexaTransition::Instance()->SetTransition(true, []()
+		{
+			ChangeScene(SceneResult);
+		});
+	}
+
 }
 
 void Finish::Draw()
