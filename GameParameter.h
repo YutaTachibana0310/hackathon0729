@@ -25,6 +25,7 @@ public:
 	void Init();
 
 	void AddCombo(int num);
+	void ResetCombo();
 	void AddScore(int point);
 
 	int score;

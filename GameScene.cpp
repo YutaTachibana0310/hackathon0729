@@ -16,6 +16,9 @@
 #include "BloodScreen.h"
 #include "GameSceneParticleManager.h"
 #include "Timer.h"
+#include "score.h"
+#include "combo.h"
+#include "GameParameter.h"
 
 /**************************************
 マクロ定義
@@ -45,9 +48,12 @@ void GameScene::Init()
 	bg = new BG();
 
 	//初期化処理
+	GameParameter::Instance()->Init();
 	player->Init();
 	bg->Init();
 	GameSceneParticleManager::Instance()->Init();
+	InitScore();
+	InitCombo();
 
 	//インスタンス作成
 	enemy = new EnemyManager();
@@ -73,6 +79,8 @@ void GameScene::Uninit()
 {
 	//終了処理
 	player->Uninit();
+	UninitScore();
+	UninitCombo();
 
 	//インスタンス削除
 	SAFE_DELETE(player);
@@ -115,6 +123,9 @@ void GameScene::Update(HWND hWnd)
 	{
 		timer->Stop();
 	}
+
+	UpdateScore();
+	UpdateCombo();
 }
 
 /**************************************
@@ -141,6 +152,12 @@ void GameScene::Draw()
 	}
 
 	timer->Draw();
+
+	SetScore(GameParameter::Instance()->score);
+	DrawScore();
+
+	SetCombo(GameParameter::Instance()->combo);
+	DrawCombo();
 
 	//レンダーステート復元
 	pDevice->SetRenderState(D3DRS_LIGHTING, true);

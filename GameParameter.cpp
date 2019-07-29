@@ -27,10 +27,15 @@ void GameParameter::AddCombo(int num)
 	combo += num;
 }
 
+void GameParameter::ResetCombo()
+{
+	combo = 0;
+}
+
 /**************************************
 ÉXÉRÉAâ¡éZ
 ***************************************/
 void GameParameter::AddScore(int point)
 {
-	score += point * (1.0f + combo * 0.1f);
+	score += (int)(point * (1.0f + combo * 0.1f));
 }
