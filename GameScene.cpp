@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "BG.h"
 #include "EnemyManager.h"
+#include "GameSceneParticleManager.h"
 
 /**************************************
 マクロ定義
@@ -40,6 +41,7 @@ void GameScene::Init()
 	//初期化処理
 	player->Init();
 	bg->Init();
+	GameSceneParticleManager::Instance()->Init();
 
 	//インスタンス作成
 	enemy = new EnemyManager();
@@ -74,6 +76,8 @@ void GameScene::Update(HWND hWnd)
 	player->Update();
 	enemy->Update();
 
+	GameSceneParticleManager::Instance()->Update();
+
 	BoxCollider3D::UpdateCollision();
 }
 
@@ -96,4 +100,6 @@ void GameScene::Draw()
 	//レンダーステート復元
 	pDevice->SetRenderState(D3DRS_LIGHTING, true);
 	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
+	GameSceneParticleManager::Instance()->Draw();
 }

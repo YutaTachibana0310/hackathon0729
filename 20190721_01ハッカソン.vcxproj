@@ -132,6 +132,8 @@
   <ItemGroup>
     <ClCompile Include="BG.cpp" />
     <ClCompile Include="bgmManager.cpp" />
+    <ClCompile Include="BombParticle.cpp" />
+    <ClCompile Include="BombParticleController.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="debugTimer.cpp" />
     <ClCompile Include="debugWindow.cpp" />
@@ -161,6 +163,7 @@
     <ClCompile Include="Framework\Transform.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GameSceneParticleManager.cpp" />
     <ClCompile Include="HexaTransition.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
@@ -197,6 +200,9 @@
   <ItemGroup>
     <ClInclude Include="BG.h" />
     <ClInclude Include="bgmManager.h" />
+    <ClInclude Include="Bomb.h" />
+    <ClInclude Include="BombParticle.h" />
+    <ClInclude Include="BombParticleController.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="debugTimer.h" />
     <ClInclude Include="debugWindow.h" />
@@ -231,6 +237,7 @@
     <ClInclude Include="Framework\Transform.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GameSceneParticleManager.h" />
     <ClInclude Include="HexaTransition.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
