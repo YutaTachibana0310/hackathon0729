@@ -23,6 +23,7 @@
 ***************************************/
 void ResultScene::Init()
 {
+	HexaTransition::Instance()->SetTransition(false);
 	InitResult();
 }
 
