@@ -60,6 +60,9 @@ Player::~Player()
 		polygon = NULL;
 	}
 	polygonContainer.clear();
+
+	delete bodyCollider;
+	delete attackCollider;
 }
 
 /**************************************

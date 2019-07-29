@@ -40,6 +40,7 @@ Enemy::Enemy(int num)
 Enemy::~Enemy()
 {
 	polygon = NULL;
+	delete bodyCollider;
 }
 
 void Enemy::Update()
