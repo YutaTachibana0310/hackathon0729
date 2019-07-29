@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BG.cpp" />
     <ClCompile Include="bgmManager.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="debugTimer.cpp" />
@@ -192,6 +193,7 @@
     <ClCompile Include="TutorialScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BG.h" />
     <ClInclude Include="bgmManager.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="debugTimer.h" />
